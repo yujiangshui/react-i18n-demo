@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ItemInfo from './components/ItemInfo';
 
 class App extends React.Component {
 
@@ -7,7 +8,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>yujiangshui</h1>
-        <span>hello world</span>
+        <ItemInfo />
       </div>
     )
   }
