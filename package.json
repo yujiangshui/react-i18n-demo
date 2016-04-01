@@ -4,7 +4,7 @@
   "description": "react i18n demo",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --content-base ./ --hot --inline",
+    "dev": "webpack-dev-server --content-base ./ --hot --inline --host 127.0.0.1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
