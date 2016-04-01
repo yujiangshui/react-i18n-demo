@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Ab from 'Ab';
 
 class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>yujiangshui</h1>
-        <span>hello world</span>
-      </div>
+      <Ab />
     )
   }
 }
