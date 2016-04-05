@@ -5,52 +5,49 @@ var ItemInfo = React.createClass({
   displayName: 'ItemInfo',
 
   render: function() {
-    // var data = this.props.data;
-    // if (!data ) { return null; }
+    var data = this.props.data;
+    if (!data ) { return null; }
 
-    // var itemInfo = data.fields ? data.fields : data;
-    // var skuInfo = '';
+    var itemInfo = data.fields ? data.fields : data;
+    var skuInfo = '';
 
-    // if (itemInfo.skuInfo && itemInfo.skuInfo.length) {
-    //   itemInfo.skuInfo.forEach((sku, i) => {
-    //     if (i > 0) {
-    //       skuInfo += '，';
-    //     }
-    //     skuInfo += (sku.name + '：' + sku.value);
-    //   });
-    // }
+    if (itemInfo.skuInfo && itemInfo.skuInfo.length) {
+      itemInfo.skuInfo.forEach((sku, i) => {
+        if (i > 0) {
+          skuInfo += '，';
+        }
+        skuInfo += (sku.name + '：' + sku.value);
+      });
+    }
 
-    // itemInfo.image = itemInfo.pic;
+    itemInfo.image = itemInfo.pic;
 
-    // function htmlTitle() { return {__html: itemInfo.title }; };
+    function htmlTitle() { return {__html: itemInfo.title }; };
 
-    // return (
-    //   <div style={styles.wrap}>
-    //     <div style={styles.listImg}>
-    //       <a href={itemInfo.itemDetailUrl} style={styles.listImgLink}>
-    //         <img
-    //           src={itemInfo.image}
-    //           style={styles.listImgImg} />
-    //       </a>
-    //     </div>
-    //     <div style={styles.goodsDes}>
-    //       <a href={itemInfo.itemDetailUrl} style={styles.listImgLink}>
-    //         <span style={styles.goodsTitle} dangerouslySetInnerHTML={htmlTitle()} />
-    //       </a>
-    //       <div style={styles.goodsSpecification}><span>{skuInfo}</span></div>
-    //     </div>
-    //     <div style={styles.priceWrap}>
-    //       <div style={styles.price}><span><span style={styles.unit}>￥</span>{formatPrice(itemInfo.price)}</span></div>
-    //       <div style={styles.nums}><span>x{itemInfo.quantity}</span></div>
-    //     </div>
-    //     <div style={styles.refundWrap} key={1}>
-    //       <Button data={itemInfo.action} />
-    //     </div>
-    //   </div>
-    // );
     return (
-      <div>
-        <span>iteminfo</span>
+      <div style={styles.wrap}>
+        <div style={styles.listImg}>
+          <a href={itemInfo.itemDetailUrl} style={styles.listImgLink}>
+            <img
+              src={itemInfo.image}
+              style={styles.listImgImg} />
+          </a>
+        </div>
+        <div style={styles.goodsDes}>
+          <a href={itemInfo.itemDetailUrl} style={styles.listImgLink}>
+            <span style={styles.goodsTitle} dangerouslySetInnerHTML={htmlTitle()} />
+          </a>
+          <div style={styles.goodsSpecification}><span>{skuInfo}</span></div>
+        </div>
+        <div style={styles.priceWrap}>
+          <div style={styles.price}><span><span style={styles.unit}>￥</span>{itemInfo.price}</span></div>
+          <div style={styles.nums}><span>共 {itemInfo.quantity} 件</span></div>
+        </div>
+        <div style={styles.refundWrap}>
+          <a href={data.itemBtn.href} style={styles.primary} onClick={this.clickHandler}>
+            <span>{data.itemBtn.title}</span>
+          </a>
+        </div>
       </div>
     );
   }
@@ -60,6 +57,7 @@ var ItemInfo = React.createClass({
 var styles = {
   wrap: {
     display: 'flex',
+    position: 'relative',
     flexDirection: 'row',
     paddingTop: 5,
     paddingBottom: 5,
@@ -89,7 +87,7 @@ var styles = {
     WebkitLineClamp: 2,
     WebkitBoxOrient: 'vertical',
     display: '-webkit-box',
-    lineHeight: 18
+    lineHeight: '18px'
   },
   goodsSpecification: {
     marginTop: 8,
@@ -101,7 +99,7 @@ var styles = {
     marginLeft: 10,
     textAlign: 'right',
     flexDirection: 'column',
-    lineHeight: 12
+    lineHeight: '12px'
   },
   unit: {
     fontSize: 12
@@ -118,6 +116,25 @@ var styles = {
     position: 'absolute',
     right: 12,
     bottom: 12
+  },
+  primary: {
+    textDecoration: 'none',
+    display: 'block',
+    paddingRight: 6,
+    paddingLeft: 6,
+    paddingTop: 2,
+    paddingBottom: 2,
+    marginLeft: 5,
+    textAlign: 'center',
+    fontSize: 14,
+    borderRadius: 2,
+    borderStyle: 'solid',
+    borderColor: '#68676c',
+    borderWidth: 1,
+    color: '#68676c',
+    position: 'relative',
+    color: '#ff4e0a',
+    borderColor: '#ff4e0a'
   }
 };
 
