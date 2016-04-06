@@ -38,6 +38,7 @@ var ItemInfo = React.createClass({
             <span style={styles.goodsTitle} dangerouslySetInnerHTML={htmlTitle()} />
           </a>
           <div style={styles.goodsSpecification}><span>{skuInfo}</span></div>
+          <div style={styles.comments}><a style={styles.commentsLink} href="#">目前有 102021 条评论</a></div>
         </div>
         <div style={styles.priceWrap}>
           <div style={styles.price}><span><span style={styles.unit}>￥</span>{itemInfo.price}</span></div>
@@ -116,6 +117,15 @@ var styles = {
     position: 'absolute',
     right: 12,
     bottom: 12
+  },
+  comments: {
+    marginTop: 8,
+    fontSize: 12,
+    color: '#999'
+  },
+  commentsLink: {
+    color: '#999',
+    textDecoration: 'none'
   },
   primary: {
     textDecoration: 'none',
