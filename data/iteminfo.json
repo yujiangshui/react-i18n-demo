@@ -7,10 +7,10 @@ module.exports = {
   "pic": "https://gd4.alicdn.com/bao/uploaded/i4/TB1RbE4JVXXXXXtXVXXXXXXXXXX_!!0-item_pic.jpg_90x90.jpg",
   "commentsAmount": 1212334,
   "skuInfo": [{
-    "name": "颜色",
+    "type": "color",
     "value": "红色"
   },{
-    "name": "尺寸",
+    "type": "model",
     "value": "很大"
   }],
   "itemBtn": {

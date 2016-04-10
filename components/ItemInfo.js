@@ -8,7 +8,7 @@ var ItemInfo = React.createClass({
     var data = this.props.data;
     if (!data ) { return null; }
 
-    var itemInfo = data.fields ? data.fields : data;
+    var itemInfo = data;
     var skuInfo = '';
 
     if (itemInfo.skuInfo && itemInfo.skuInfo.length) {
@@ -16,18 +16,22 @@ var ItemInfo = React.createClass({
         if (i > 0) {
           skuInfo += '，';
         }
-        skuInfo += (sku.name + '：' + sku.value);
+        if (sku.type === 'color') {
+          skuInfo += ('颜色' + '：' + sku.value);
+        }
+        if (sku.type === 'model') {
+          skuInfo += ('尺寸' + '：' + sku.value);
+        }
       });
     }
 
-    itemInfo.image = itemInfo.pic;
 
     return (
       <div style={styles.wrap}>
         <div style={styles.listImg}>
           <a href={itemInfo.itemDetailUrl} style={styles.listImgLink}>
             <img
-              src={itemInfo.image}
+              src={itemInfo.pic}
               style={styles.listImgImg} />
           </a>
         </div>
