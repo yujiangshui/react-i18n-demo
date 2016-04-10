@@ -2,8 +2,8 @@ module.exports = {
   "title": "推拉门衣柜简约现代 卧室家具白色衣橱实木质整体宜家趟门大衣柜",
   "itemDetailUrl": "https://item.taobao.com/item.htm?id=522713664534",
   "itemInfoId": 0,
-  "quantity": "121030",
-  "price": 1100.0,
+  "quantity": 121030,
+  "price": 1100,
   "pic": "https://gd4.alicdn.com/bao/uploaded/i4/TB1RbE4JVXXXXXtXVXXXXXXXXXX_!!0-item_pic.jpg_90x90.jpg",
   "commentsAmount": 1212334,
   "skuInfo": [{
