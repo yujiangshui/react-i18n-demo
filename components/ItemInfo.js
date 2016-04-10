@@ -1,59 +1,27 @@
-var React = require('react');
+import React from 'react';
+import {FormattedNumber, FormattedMessage} from 'react-intl';
 
-var I18N = {
-  data: {},
-  register: function(data) {
-    this.data = Object.assign({}, this.data, data);
-    console.log(this.data);
-  },
-  t: function(locale, name, data) {
-    var result = this.data[locale][name];
-    if (data) {
-      Object.keys(data).forEach(function(val, key) {
-        result = result.replace('#' + val + '#', data[val]);
-      });
-    }
-    return result;
-  }
-};
+class ItemInfo extends React.Component {
 
-I18N.register({
-  'en': {
-    'color': 'color',
-    'size': 'size',
-    'comments': '#comments# customer reviews',
-    'amount': '#amount# items'
-  },
-  'cn': {
-    'color': '颜色',
-    'size': '尺寸',
-    'comments': '共有 #comments# 条评论',
-    'amount': '共 #amount# 件'
-  }
-});
-
-var ItemInfo = React.createClass({
-
-  displayName: 'ItemInfo',
-
-  render: function() {
-    var data = this.props.data;
-    var locale = this.props.locale || 'en';
+  render() {
+    let data = this.props.data;
     if (!data ) { return null; }
 
-    var itemInfo = data;
-    var skuInfo = '';
+    let itemInfo = data;
+    let skuInfo = [];
 
     if (itemInfo.skuInfo && itemInfo.skuInfo.length) {
       itemInfo.skuInfo.forEach((sku, i) => {
         if (i > 0) {
-          skuInfo += '，';
+          skuInfo.push('，');
         }
         if (sku.type === 'color') {
-          skuInfo += (I18N.t(locale, 'color') + '：' + sku.value);
+          skuInfo.push(<FormattedMessage id="color" defaultMessage="color" key={i} />);
+          skuInfo.push('：' + sku.value);
         }
         if (sku.type === 'size') {
-          skuInfo += (I18N.t(locale, 'size') + '：' + sku.value);
+          skuInfo.push(<FormattedMessage id="size" defaultMessage="size" key={i} />);
+          skuInfo.push('：' + sku.value);
         }
       });
     }
@@ -72,11 +40,27 @@ var ItemInfo = React.createClass({
             <span style={styles.goodsTitle} >{itemInfo.title}</span>
           </a>
           <div style={styles.goodsSpecification}><span>{skuInfo}</span></div>
-          <div style={styles.comments}><a style={styles.commentsLink} href="#">{I18N.t(locale, 'comments', {comments: itemInfo.commentsAmount})}</a></div>
+          <div style={styles.comments}>
+            <a style={styles.commentsLink} href="#">
+              <FormattedMessage
+                id="comments"
+                defaultMessage="{comments, plural, =0 {no customer review} one {one customer review} other {{comments, number} customer reviews}}"
+                values={{comments: itemInfo.commentsAmount}}
+              />
+            </a>
+          </div>
         </div>
         <div style={styles.priceWrap}>
-          <div style={styles.price}><span><span style={styles.unit}>￥</span>{itemInfo.price}</span></div>
-          <div style={styles.nums}><span>{I18N.t(locale, 'amount', {amount: itemInfo.quantity})}</span></div>
+          <div style={styles.price}>
+            <FormattedNumber value={itemInfo.price} style="currency" currency="CNY" />
+          </div>
+          <div style={styles.nums}>
+            <FormattedMessage
+              id="amount"
+              defaultMessage="{amount, plural, one {one item} other {{amount, number} items}}"
+              values={{amount: itemInfo.quantity}}
+            />
+          </div>
         </div>
         <div style={styles.refundWrap}>
           <a href={data.itemBtn.href} style={styles.primary} onClick={this.clickHandler}>
@@ -87,9 +71,9 @@ var ItemInfo = React.createClass({
     );
   }
 
-});
+}
 
-var styles = {
+let styles = {
   wrap: {
     display: 'flex',
     position: 'relative',
@@ -145,6 +129,7 @@ var styles = {
   },
   nums: {
     color: '#666',
+    marginTop: 10,
     fontSize: 12
   },
   refundWrap: {
@@ -182,4 +167,4 @@ var styles = {
   }
 };
 
-module.exports = ItemInfo;
+export default ItemInfo;
