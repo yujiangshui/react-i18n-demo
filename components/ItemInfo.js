@@ -22,8 +22,6 @@ var ItemInfo = React.createClass({
 
     itemInfo.image = itemInfo.pic;
 
-    function htmlTitle() { return {__html: itemInfo.title }; };
-
     return (
       <div style={styles.wrap}>
         <div style={styles.listImg}>
@@ -35,7 +33,7 @@ var ItemInfo = React.createClass({
         </div>
         <div style={styles.goodsDes}>
           <a href={itemInfo.itemDetailUrl} style={styles.listImgLink}>
-            <span style={styles.goodsTitle} dangerouslySetInnerHTML={htmlTitle()} />
+            <span style={styles.goodsTitle} >{itemInfo.title}</span>
           </a>
           <div style={styles.goodsSpecification}><span>{skuInfo}</span></div>
           <div style={styles.comments}><a style={styles.commentsLink} href="#">目前有 {itemInfo.commentsAmount} 条评论</a></div>
