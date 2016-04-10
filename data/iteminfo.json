@@ -5,6 +5,7 @@ module.exports = {
   "quantity": "121030",
   "price": 1100.0,
   "pic": "https://gd4.alicdn.com/bao/uploaded/i4/TB1RbE4JVXXXXXtXVXXXXXXXXXX_!!0-item_pic.jpg_90x90.jpg",
+  "commentsAmount": 1212334,
   "skuInfo": [{
     "name": "颜色",
     "value": "红色"
