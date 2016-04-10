@@ -19,7 +19,8 @@
   "homepage": "https://github.com/yujiangshui/react-i18n-demo#readme",
   "dependencies": {
     "react": "^0.14.8",
-    "react-dom": "^0.14.8"
+    "react-dom": "^0.14.8",
+    "react-intl": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.4",

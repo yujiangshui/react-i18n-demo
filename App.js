@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ItemInfo from './components/ItemInfo';
 import iteminfoData from './data/iteminfo.json';
+import {IntlProvider} from 'react-intl';
 
 class App extends React.Component {
 
@@ -24,4 +25,9 @@ let styles = {
 let app = document.createElement('div');
 document.body.appendChild(app);
 
-ReactDOM.render(<App />, app);
+ReactDOM.render(
+  <IntlProvider locale="en">
+    <App />
+  </IntlProvider>,
+  app
+);
