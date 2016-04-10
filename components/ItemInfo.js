@@ -1,11 +1,44 @@
 var React = require('react');
 
+var I18N = {
+  data: {},
+  register: function(data) {
+    this.data = Object.assign({}, this.data, data);
+    console.log(this.data);
+  },
+  t: function(locale, name, data) {
+    var result = this.data[locale][name];
+    if (data) {
+      Object.keys(data).forEach(function(val, key) {
+        result = result.replace('#' + val + '#', data[val]);
+      });
+    }
+    return result;
+  }
+};
+
+I18N.register({
+  'en': {
+    'color': 'color',
+    'size': 'size',
+    'comments': '#comments# customer reviews',
+    'amount': '#amount# items'
+  },
+  'cn': {
+    'color': '颜色',
+    'size': '尺寸',
+    'comments': '共有 #comments# 条评论',
+    'amount': '共 #amount# 件'
+  }
+});
+
 var ItemInfo = React.createClass({
 
   displayName: 'ItemInfo',
 
   render: function() {
     var data = this.props.data;
+    var locale = this.props.locale || 'en';
     if (!data ) { return null; }
 
     var itemInfo = data;
@@ -17,14 +50,13 @@ var ItemInfo = React.createClass({
           skuInfo += '，';
         }
         if (sku.type === 'color') {
-          skuInfo += ('颜色' + '：' + sku.value);
+          skuInfo += (I18N.t(locale, 'color') + '：' + sku.value);
         }
-        if (sku.type === 'model') {
-          skuInfo += ('尺寸' + '：' + sku.value);
+        if (sku.type === 'size') {
+          skuInfo += (I18N.t(locale, 'size') + '：' + sku.value);
         }
       });
     }
-
 
     return (
       <div style={styles.wrap}>
@@ -40,11 +72,11 @@ var ItemInfo = React.createClass({
             <span style={styles.goodsTitle} >{itemInfo.title}</span>
           </a>
           <div style={styles.goodsSpecification}><span>{skuInfo}</span></div>
-          <div style={styles.comments}><a style={styles.commentsLink} href="#">目前有 {itemInfo.commentsAmount} 条评论</a></div>
+          <div style={styles.comments}><a style={styles.commentsLink} href="#">{I18N.t(locale, 'comments', {comments: itemInfo.commentsAmount})}</a></div>
         </div>
         <div style={styles.priceWrap}>
           <div style={styles.price}><span><span style={styles.unit}>￥</span>{itemInfo.price}</span></div>
-          <div style={styles.nums}><span>共 {itemInfo.quantity} 件</span></div>
+          <div style={styles.nums}><span>{I18N.t(locale, 'amount', {amount: itemInfo.quantity})}</span></div>
         </div>
         <div style={styles.refundWrap}>
           <a href={data.itemBtn.href} style={styles.primary} onClick={this.clickHandler}>

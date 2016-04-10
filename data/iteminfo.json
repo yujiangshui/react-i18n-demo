@@ -10,7 +10,7 @@ module.exports = {
     "type": "color",
     "value": "红色"
   },{
-    "type": "model",
+    "type": "size",
     "value": "很大"
   }],
   "itemBtn": {
